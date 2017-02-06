@@ -23,5 +23,13 @@ install.php
 ```
 Then you can start the installer and there should be an option to choose skyscrapers profile.
 
+## Notes
+This profile uses [FieldtypeMapMarker][pw-map-marker]. You will be notified that the field could
+not be found in the admin. Go to __Modules -> Site -> Add New __. Scroll down till the __Module Class Name__
+field and enter `FieldtypeMapMarker` and press __Download and Install__. You will be prompted to install the
+module cpouple of times. Install it and enter your Google Maps API Key. After that the site profile should
+be working in full.
+
 [pw-skyscrapers]: https://github.com/ryancramerdesign/SkyscrapersProfile
 [ryan-cramer]: https://github.com/ryancramerdesign
+[pw-map-marker]: http://modules.processwire.com/modules/fieldtype-map-marker/
