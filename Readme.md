@@ -2,6 +2,8 @@ Skyscrapers Profile
 ===================
 This is a [Skyscrapers profile][pw-skyscrapers] by [Ryan Cramer][ryan-cramer]. This one is made compatible with ProcessWire 3.x version.
 
+![Profile Image][profile-img]
+
 ## Requirements
 - ProcessWire version >= 3.x
 
@@ -31,5 +33,6 @@ module cpouple of times. Install it and enter your Google Maps API Key in the mo
 the site profile should be working in full.
 
 [pw-skyscrapers]: https://github.com/ryancramerdesign/SkyscrapersProfile
+[profile-img]: https://raw.githubusercontent.com/dadish/pw-skyscrapers-profile/master/install/skyscrapers.gif
 [ryan-cramer]: https://github.com/ryancramerdesign
 [pw-map-marker]: http://modules.processwire.com/modules/fieldtype-map-marker/
