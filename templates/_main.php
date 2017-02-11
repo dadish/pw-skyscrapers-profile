@@ -26,7 +26,7 @@ $home = pages('/');
 		if(input()->pageNum() > 1) echo " (Page " . input()->pageNum() . ")";
 	?></title>
 	
-	<script type='text/javascript' src='<?=modules('FieldtypeMapMarker')->getGoogleMapsURL();?>'></script>
+	<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?sensor=false'></script>
 	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
 	
 	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:400,400i,700' />
