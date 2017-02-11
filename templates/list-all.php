@@ -1,9 +1,9 @@
-<?php 
+<?php namespace ProcessWire;
 
 /**
  * Outputs list of all skyscrapers, regardless of city
  *
  */
 
-$content = renderSkyscraperList(findSkyscrapers(''));
+region('content', renderSkyscraperList(findSkyscrapers('')));
 

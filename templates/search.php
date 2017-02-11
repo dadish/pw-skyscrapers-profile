@@ -1,9 +1,12 @@
-<?php
+<?php namespace ProcessWire;
 
 /**
  * This template looks for search terms as GET vars and formulates a selector to find matching skyscrapers
  *
  */
+	
+/** @var WireInput $input */
+/** @var Sanitizer $sanitizer */
 
 // most of the code in this template file is here to build this selector string
 // it will contain the search query that gets sent to $skyscraperList
@@ -20,11 +23,12 @@ $summary = array(
 	);
 
 // if a city is specified, then we limit the results to having that city as their parent
-if($input->get->city) {
-	$city = $pages->get("/cities/" . $sanitizer->pageName($input->get->city)); 
+if($input->get('city')) {
+	$cityName = $sanitizer->pageName($input->get('city'));
+	$city = pages("/cities/$cityName/");
 	if($city->id) {
 		$selector .= "parent=$city, ";
-		$summary["city"] = $city->title;
+		$summary['city'] = $city->title;
 		$input->whitelist('city', $city->name); 
 	}
 }
@@ -33,7 +37,7 @@ if($input->get->city) {
 // so we're using this loop to parse them into a selector
 foreach(array('height', 'floors', 'year') as $key) {
 
-	if(!$value = $input->get->$key) continue; 
+	if(!$value = $input->get($key)) continue; 
 	
 	// see if the value is given as a range (i.e. two numbers separated by a dash)
 	if(strpos($value, '-') !== false) {
@@ -61,28 +65,32 @@ foreach(array('height', 'floors', 'year') as $key) {
 }
 
 // if there are keywords, look in the title and body fields for the words
-if($input->get->keywords) {
-	$value = $sanitizer->selectorValue($input->get->keywords);
+if($input->get('keywords')) {
+	$value = $sanitizer->selectorValue($input->get('keywords'));
 	$selector .= "title|body%=$value, "; 
 	$summary["keywords"] = $sanitizer->entities($value); 
 	$input->whitelist('keywords', $value); 
 }
 
-// display a summary of what was searched for above the search results
-$content = "<ul id='search_summary'>";
-$browserTitle = "Skyscrapers - ";
+// execute the search
+$skyscrapers = findSkyscrapers($selector);
+
+// generate a summary alert that appears at the top of the page, and browser <title> tag
+$browserTitle = 'Skyscraper Search - ';
 
 foreach($summary as $key => $value) {
-	if(!$value) continue; 
-	$key = ucfirst($key); 
-	$content .= "\n\t<li><strong>$key:</strong> $value</li>";
-	$browserTitle .= "$key: $value, ";
+	if($value) {
+		$key = ucfirst($key);
+		$browserTitle .= ucfirst($key) . ": $value, ";
+	} else {
+		unset($summary[$key]);
+	}
 }
 
-$content .= "\n</ul>";  
+region('browserTitle', rtrim($browserTitle, ', '));
+region('content',
+	files()->render('./includes/search-summary.php', array('items' => $summary)) . 
+	renderSkyscraperList($skyscrapers)
+);
 
-// compile final output
-$content .= renderSkyscraperList(findSkyscrapers($selector)); 
-$browserTitle = rtrim($browserTitle, ", "); 
-$headline = "Skyscraper Search";
 

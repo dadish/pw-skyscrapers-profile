@@ -1,27 +1,26 @@
-<?php 
+<?php namespace ProcessWire;
 
-/**
- * Homepage template
- *
- */
+$cities = pages('/cities/')->children();
 
-$headline = "United States Skyscrapers";
-$browserTitle = $headline; 
-$content = '';
+region('headline', 'Skyscrapers in the United States');
+region('browserTitle', 'United States Skyscrapers - A ProcessWire Demo Site');
+region('sidebar', renderMap($cities));
 
-// display a random photo from this page
-if($photo = $page->images->getRandom()) {
-	$photo = $photo->size(640, 300); 
-	$content .= "<p><img src='{$photo->url}' alt='{$photo->description}' /></p>";
+// display a random photo from this page to display at the top
+if($photo = page()->images->getRandom()) {
+	region('mainHeader', files()->render('./includes/banner-photo.php', array(
+		'photo' => $photo->maxWidth(1600),
+		'caption' => sanitizer()->entitiesMarkdown($photo->description),
+	)));
 }
 
-// intro copy 
-$content .= $page->body; 
+$skyscrapers = page()->skyscrapers->find("limit=3, sort=random");
 
-// generate a list of featured skyscrapers. 
-$skyscrapers = $page->skyscrapers->find("limit=3, sort=random");
-$content .= "\n<h3>Featured Skyscrapers</h3>" . renderSkyscraperList($skyscrapers, false);
-
-// provide a list of all cities where they can start browsing skyscrapers
-$content .= "\n<h3>Skyscrapers by City</h3>" . $pages->get("/cities/")->children()->render();
+region('content+',  	
+	renderSkyscraperList($skyscrapers, false, 'Featured Skyscrapers') . 
+	files()->render('./includes/cities-list.php', array(
+		'items' => $cities,
+		'headline' => 'Skyscrapers by City'
+	))
+);
 

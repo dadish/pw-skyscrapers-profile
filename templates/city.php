@@ -1,4 +1,4 @@
-<?php 
+<?php namespace ProcessWire;
 
 /**
  * City Template: Display all the skyscrapers in a given city
@@ -7,7 +7,18 @@
  *
  */
 
-$browserTitle = "Skyscrapers in " . $page->title; 
-$headline = $page->title . " Skyscrapers";
-$content = renderSkyscraperList(findSkyscrapers("parent=$page")); 
+/** @var Page $page */
+
+$skyscrapers = findSkyscrapers("parent=$page");
+$map = $page->get('map');
+$mapMarkup = renderMap($skyscrapers, array(
+	'fitToMarkers' => false, 
+	'lat' => $map->lat,
+	'lng' => $map->lng
+));
+
+region('browserTitle', "Skyscrapers in $page->title");
+region('content', renderSkyscraperList($skyscrapers));
+region('sidebarHeader', $mapMarkup);
+	
 

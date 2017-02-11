@@ -1,11 +1,12 @@
-<?php 
+<?php namespace ProcessWire;
 
 /**
  * Architect Template: Display the skyscrapers associated with an architect
  *
  */
 
-$browserTitle = $page->title . " Skyscrapers";
-$headline = $page->title; 
-$content = renderSkyscraperList(findSkyscrapers("architects=$page")); 
+$skyscrapers = findSkyscrapers("architects=" . page());
+
+region('browserTitle+', ' Skyscrapers');
+region('content+', renderSkyscraperList($skyscrapers)); 
 

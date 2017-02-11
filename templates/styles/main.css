@@ -478,4 +478,12 @@ a {
 			text-decoration: none; 
 		}
 
+	span.ProCache {
+		display: none; 
+	}
+
+	body.ProCache span.ProCache {
+		display: inline; 
+	}
+
 

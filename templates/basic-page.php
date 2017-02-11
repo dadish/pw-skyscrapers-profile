@@ -1,4 +1,4 @@
-<?php
+<?php namespace ProcessWire;
 
 /**
  * A generic content page. On this site it's used to display the "about us" copy, 
