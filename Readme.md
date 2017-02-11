@@ -34,7 +34,7 @@ field and enter `FieldtypeMapMarker` and press __Download and Install__. You wil
 module couple of times. Install it and enter your Google Maps API Key in the module settings. After that
 the site profile should be working in full.
 
-[pw-skyscrapers]: https://github.com/ryancramerdesign/SkyscrapersProfile
+[pw-skyscrapers]: http://demo.processwire.com/
 [profile-img]: https://raw.githubusercontent.com/dadish/pw-skyscrapers-profile/master/install/skyscrapers.gif
 [ryan-cramer]: https://github.com/ryancramerdesign
 [pw-map-marker]: http://modules.processwire.com/modules/fieldtype-map-marker/
