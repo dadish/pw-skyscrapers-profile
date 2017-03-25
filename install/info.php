@@ -1,6 +1,6 @@
 <?php if(!defined("PROCESSWIRE_INSTALL")) die();
 $info = array(
-	'title' => "Skyscrapers v2", 
-	'summary' => "The latest skyscrapers profile by Ryan Cramer. Optimized for latest ProcessWire.", 
+	'title' => "Skyscrapers Profile", 
+	'summary' => "A copy of Ryan Cramers Skyscrapers profile. Tuned for the latest ProcessWire 3.x", 
 	'screenshot' => "skyscrapers.gif"
 	);
