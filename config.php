@@ -32,7 +32,7 @@ if(!defined("PROCESSWIRE")) die();
  * @var bool
  *
  */
-$config->debug = true; 
+$config->debug = false;
 
 $config->useFunctionsAPI = true; 
 $config->sessionFingerprint = true; 
