@@ -5,7 +5,7 @@ $url = config('urls')->root . "search/";
 $height = $page->get('height');
 $floors = $page->get('floors');
 $year = $page->get('year');
-$architects = $page->get('architect');
+$architects = $page->get('architects');
 
 ?>
 <table class='uk-table skyscraper-info'>
